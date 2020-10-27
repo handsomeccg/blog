@@ -5,7 +5,7 @@ module.exports = {
 	head: [
 		['link', { rel: 'icon', href: '/favicon.ico' }], // 增加一个自定义的 favicon(网页标签的图标)
 		],
-	base: '/', // 这是部署到github相关的配置 下面会讲
+	base: '/blog/', // 这是部署到github相关的配置 下面会讲
 	markdown: {
 		lineNumbers: true // 代码块显示行号
 	},
@@ -36,8 +36,12 @@ module.exports = {
 			  	children: ['/prototype/']
 			  },
 			  {
+				  title: '数据结构',
+				  children: ['/dataStructure/']
+			  },
+			  {
 			  	title: '网络',
-              children: ['/network/']
+              	children: ['/network/']
 			  },
 			  {
 			  	title: '常见api手动实现'

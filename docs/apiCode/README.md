@@ -44,8 +44,8 @@ Function.prototype.myBind = function(context) {
 ## 防抖实现
 
 ```javascript
+let time = null
 function debounce (fn, t) {
-    let time = null
     return function() {
         clearTimeout(time)
         time = setTimeout(() => {
@@ -58,8 +58,8 @@ function debounce (fn, t) {
 ## 节流实现
 
 ```javascript
+let tag = false
 function throttle(fn, t) {
-    let tag = false
     return function() {
         if (tag) { return }
         tag = true
