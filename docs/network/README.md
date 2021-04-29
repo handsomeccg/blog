@@ -48,29 +48,53 @@ CSSOM树和DOM树构建完成后会开始生成渲染树，浏览器调用GPU绘
 ### 常见状态码
 
 #### 1XX 
-指示信息，表示请求已接收，继续处理
+指示信息，表示请求已接收，需要进一步处理才能完成，HTTP1.0不支持
+ - 100 Continue： 上传大文件前使用（如迅雷)  由客户端发起请求中携带 Expect： 100-continue 头部触发
+ - 101 Switch Protocols： 协议升级使用     由客户端发起请求中携带 Upgrade 头部触发  （如升级websocket、http2.0
+ - 102 Processing: 表示服务器已经收到并正在处理请求，但无响应可用
 #### 2XX
-200：请求成功<br/>
-201：通常指POST请求的结果，已在服务器上成功创建了一个或多个资源<br/>
-202：请求已接收处理，但处理尚未完成<br/>
-204：请求成功，但相应报文不包含实体部分<br/>
-206：请求成功，并且主体包含的数据区间是请求的Range首部指定的<br/>
+200 OK：请求成功<br/>
+201 Created：通常指POST请求的结果，已在服务器上成功创建新的资源。<br/>
+202 Accepted：请求已接收处理，但处理尚未完成。<br/>
+204 No Content：请求成功，但相应报文不包含实体部分(暗示客户端无需更新当前视图。<br/>
+205 Reset Content：请求成功，但相应报文不包含实体部分(指明客户端需要更新当前视图。<br/>
+206 Partial Content：请求成功，仅返回部分响应内容，并且主体包含的数据区间是请求的Range首部指定的。<br/>
+207 Multi-Status：RFC4918, 在WEBDAV协议中以XML返回多个资源的状态。<br/>
 
-#### 3XX
-301: 永久重定向<br/>
-302：临时重定向<br/>
-304：缓存可用，未修改（自从上次请求后，请求的网页未修改过）<br/>
+
+#### 3XX  重定向使用Location指向的资源或者缓存中的资源。 在RFC2068中规定客户端重定向次数不应超过5次，以防止死循环。
+301 Moved Permanently: 永久重定向（方便浏览器对重定向资源进行缓存。<br/>
+302 Found：临时重定向。<br/>
+303 See Other：重定向到其他资源，常用于POST/PUT等方法的响应中。<br/>
+304 Not Modified：告诉客户端可以复用缓存（自从上次请求后，请求的网页未修改过）。<br/>
+307 Temporary Redirect：类似302，但明确重定向后请求方法必须与原请求方法相同，不得改变。<br/>
+308 Permanent Redirect：类似301，但明确重定向后请求方法必须与原请求方法相同，不得改变。<br/>
+
 #### 4XX
-400：请求报文存在语法错误<br/>
-401：请求未授权<br/>
-403：对请求资源的访问被服务器拒绝<br/>
-404：请求资源不存在<br/>
+400 Bad Request：服务器认为客户端出现了错误，但不能明确判断为以下哪种错误。 如HTTP请求格式错误<br/>
+401 Unauthorized：用户认证信息缺失或者不正确，导致服务器无法处理请求。<br/>
+407 Proxy Authentication Required：对需要经由代理的请求，认证信息未通过代理服务器的验证。<br/>
+403 Forbidden：服务器理解请求的含义，但没有权限执行此请求。<br/>
+404 Not Found：请求资源不存在。<br/>
+410 Gone：请求资源不存在，且该位置永久性找不到该资源。<br/>
+405 Method Not Allowed：服务器不支持请求行中的method方法。<br/>
+406 Not Acceptable：对客户端指定的资源表述不存在（例如对语言或者编码有要求）。<br/>
+408 Request Timeout：服务器接受请求超时。<br/>
+409 Conflict：资源冲突，例如上传文件时目标位置已经存在版本更新的资源。<br/>
+411 Length Required：如果请求含有包体且未携带Content-Length头部，且不属于chunk类请求时，返回411。<br/>
+![img.png](img.png)
+![img_1.png](img_1.png)
 
 #### 5XX
-500：服务器处理请求时发生错误<br/>
-501：服务器不支持当前请求的某个功能<br/>
-503：服务器超负载或停机维护<br/>
+500 Internal Server Error：服务器处理请求时发生内部错误。<br/>
+501 Not Implemented：服务器不支持当前请求的某个功能。<br/>
+502 Bad Gateway：代理服务器无法获取到合法响应。<br/>
+503 Service Unavailable：服务器超负载或停机维护、限流、限ip等<br/>
+![img_2.png](img_2.png)
 
+![img_3.png](img_3.png)
+
+Connection仅针对当前连接有效
 
 ### Http数据协商
 
