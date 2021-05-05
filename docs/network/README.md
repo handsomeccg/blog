@@ -63,7 +63,7 @@ CSSOM树和DOM树构建完成后会开始生成渲染树，浏览器调用GPU绘
 
 
 #### 3XX  重定向使用Location指向的资源或者缓存中的资源。 在RFC2068中规定客户端重定向次数不应超过5次，以防止死循环。
-301 Moved Permanently: 永久重定向（方便浏览器对重定向资源进行缓存。<br/>
+301 Moved Permanently: 永久重定向(方便浏览器对重定向资源进行缓存)。<br/>
 302 Found：临时重定向。<br/>
 303 See Other：重定向到其他资源，常用于POST/PUT等方法的响应中。<br/>
 304 Not Modified：告诉客户端可以复用缓存（自从上次请求后，请求的网页未修改过）。<br/>
@@ -187,6 +187,11 @@ HTTPS传输过程：
 
 ## 浏览器缓存
 
+缓存优先级： s-maxage(用于共享缓存) > max-age > Expires > 预估过期时间
+
+预估过期时间：
+(DownloadTime - LastModified) * 10%
+
 ###强制缓存
 当浏览器向服务器发起请求时，服务器会将缓存规则放入HTTP响应报文的HTTP头中，和请求结果一起返回给浏览器。<br/>
 控制强制缓存的字段分别是Expires和Cache-Control，其中Cache-Control优先级更高。<br/>
@@ -230,7 +235,19 @@ If-None-Match是客户端再次发起该请求时，携带上次请求返回的�
 服务器收到该请求后，发现该请求头中含有If-None-Match，则会根据If-None-Match的字段值与该资源在服务器的Etag值做对比。
 一致则返回304，代表资源无更新，继续使用缓存文件；不一致则重新返回资源文件，状态码为200。
 
+![img_4.png](img_4.png)
 
+![img_5.png](img_5.png)
+
+![img_6.png](img_6.png)
+min-fresh: 缓存时间至少有min-fresh这么长的时间才可用
+![img_7.png](img_7.png)
+![img_8.png](img_8.png)
+
+![img_9.png](img_9.png)
+![img_10.png](img_10.png)
+
+![img_11.png](img_11.png)
 ## 跨域
 #### 同源策略
 - 域名相同
