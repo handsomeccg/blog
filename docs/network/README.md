@@ -10,7 +10,7 @@
 如果是协商缓存则发起请求，校验缓存是否可用。<br/>
 (Expires和Cache-Control这两个HTTP头来判断。Expires的值为一个绝对时间表示缓存过期时间；Cache-Control:max-age=，值为以秒为单位的缓存有效时间。)
 
-DNS解析，查找过程：1.浏览器缓存；2.本地缓存；3.hosts文件；4.路由器缓存；5.DNS根服务器查询
+DNS解析，查找过程：1.浏览器缓存；2.本地缓存；3.hosts文件；4.路由器缓存；5.本地域名解析系统 6.根域名服务器 =》 顶级域名服务器 =》 权限域名服务器
 
 端口建立TCP连接：<br/>
 1.客户端发送 SYN=1, Seq=X的包到服务器端口   客户端：SYN_SENT  服务端：SYN_RECEIVED  <br/>
@@ -112,6 +112,17 @@ Content-Encoding: 对应Accept-Encoding，指服务器使用哪种压缩方式<b
 Content-Language：对应Accept-language<br/>
 
 ### HTTP2
+
+Http1.1的问题：
+ - 随着带宽的增加，延迟并没有显著下降
+ - 并发连接有限（6个）
+ - 同一连接同时只能完成一个HTTP事务（请求/响应）
+ - 无状态特性带来的巨大HTTP头部，重复传输体积巨大的HTTP头部
+
+1.多路复用
+2.hpack算法压缩头部
+3.通过push_promise 帧 服务器推送
+
 HTTP2相较于HTTP1，大幅提高了web的性能<br/>
 HTTP2采用二进制格式传输，并且提供了乱序传递，替代了HTTP1的文本格式，二进制的格式解析更为高效<br/>
 

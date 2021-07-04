@@ -44,7 +44,8 @@ module.exports = {
               	children: ['/network/']
 			  },
 			  {
-			  	title: '常见api手动实现'
+			  	title: '常见api手动实现',
+			  	children: ['/apiCode/']
 			  }
 		  ]
 

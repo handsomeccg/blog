@@ -106,3 +106,37 @@ function deRepeat(arr) {
 }
 ```
 
+##事件
+
+```javascript
+class EventBuss {
+    constructor() {
+        this.cache = {}
+    }
+    
+    on(name, fn) {
+        this.cache[name] ? this.cache[name].push(fn) : this.cache[name] = [fn]
+    }
+    
+    off(name, fn) {
+        if (this.cache[name]) {
+            const index = this.cache[name].findIndex(k=> k === fn)
+            if (index > -1) {
+                this.cache[name].splice(index,1)
+            }
+        }
+    }
+    
+    emit(name, once = false, ...args) {
+        if (this.cache[name]) {
+            for (let fn of this.cache[name]) {
+                fn(...args)
+            }
+        }
+        if (once) {
+            
+        }
+    }
+}
+```
+
