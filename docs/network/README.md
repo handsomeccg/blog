@@ -105,11 +105,16 @@ Accept： 申明想要的数据格式<br/>
 Accept-Encoding：告诉服务端以怎样的方式来压缩(如gzip)<br/>
 Accept-language：描述语言信息<br/>
 User-Agent：描述客户端浏览器相关信息，可以用来区分PC端和移动端页面<br/>
+Referer: 浏览器对来自某一页面的请求自动添加头部（服务器端常用于统计分析、缓存优化、防盗链（有些资源不希望被直接引用）等功能）。<br/>
+From：主要用于网络爬虫，告诉服务器如何通过邮件联系到爬虫的负责人。
 
 #### 响应
 Content-Type: 对应Accept，服务端返回数据类型(从请求中的Accept选一种来返回)<br/>
 Content-Encoding: 对应Accept-Encoding，指服务器使用哪种压缩方式<br/>
 Content-Language：对应Accept-language<br/>
+Server：指明服务器上所用软件信息，用于帮助客户端定位问题或者统计数据。<br/>
+Allow: 告诉客户端，服务器上该URI对应的资源允许哪些方法的执行。<br/>
+Accept-Ranges: 告诉客户端服务器上该资源是否允许range请求。<br/>
 
 ### HTTP2
 
