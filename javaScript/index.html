@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>判断是否是对象 | Ccg的博客</title>
+    <meta name="generator" content="VuePress 1.7.1">
+    <link rel="icon" href="/blog/favicon.ico">
+    <meta name="description" content="amazing blog">
+    
+    <link rel="preload" href="/blog/assets/css/0.styles.a9429d79.css" as="style"><link rel="preload" href="/blog/assets/js/app.42f682ff.js" as="script"><link rel="preload" href="/blog/assets/js/2.c989e49d.js" as="script"><link rel="preload" href="/blog/assets/js/17.c7f079f0.js" as="script"><link rel="prefetch" href="/blog/assets/js/10.6782ada0.js"><link rel="prefetch" href="/blog/assets/js/11.de92d6ee.js"><link rel="prefetch" href="/blog/assets/js/12.7ae46a29.js"><link rel="prefetch" href="/blog/assets/js/13.c0685209.js"><link rel="prefetch" href="/blog/assets/js/14.72316ce0.js"><link rel="prefetch" href="/blog/assets/js/15.2d7b5910.js"><link rel="prefetch" href="/blog/assets/js/16.91ee2f70.js"><link rel="prefetch" href="/blog/assets/js/18.b4a72c5c.js"><link rel="prefetch" href="/blog/assets/js/19.4af98ddd.js"><link rel="prefetch" href="/blog/assets/js/3.30f8d4a4.js"><link rel="prefetch" href="/blog/assets/js/4.2d90c527.js"><link rel="prefetch" href="/blog/assets/js/5.e40c1eec.js"><link rel="prefetch" href="/blog/assets/js/6.1d617af4.js"><link rel="prefetch" href="/blog/assets/js/7.834798af.js"><link rel="prefetch" href="/blog/assets/js/8.479df183.js"><link rel="prefetch" href="/blog/assets/js/9.20388dd2.js">
+    <link rel="stylesheet" href="/blog/assets/css/0.styles.a9429d79.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/blog/" class="home-link router-link-active"><!----> <span class="site-name">Ccg的博客</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="https://github.com/handsomeccg" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  GitHub
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="https://github.com/handsomeccg" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  GitHub
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>js基础要点</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/blog/javaScript/" aria-current="page" class="active sidebar-link">判断是否是对象</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/blog/javaScript/#css选择器" class="sidebar-link">css选择器</a></li></ul></li></ul></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>原型链</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>数据结构</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>网络</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>常见api手动实现</span> <span class="arrow right"></span></p> <!----></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h3 id="判断是否是对象"><a href="#判断是否是对象" class="header-anchor">#</a> 判断是否是对象</h3> <ol><li>日常实现</li></ol> <div class="language- line-numbers-mode"><pre class="language-text"><code>function isPlainObject (obj) {
+    return typeof obj === 'object' &amp;&amp; obj !== null
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><ol start="2"><li>vue中的实现</li></ol> <div class="language- line-numbers-mode"><pre class="language-text"><code>function isPlainObject (obj) {
+    return Object.prototype.toString.call(obj) === '[object Object]'
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><h3 id="模块化"><a href="#模块化" class="header-anchor">#</a> 模块化</h3> <p>AMD与CMD<br>
+AMD：提前引入包
+CMD: 执行时才引入包<br></p> <p>CommonJS模块输出的是一个值的拷贝，ES6模块输出的是值的引用。<br>
+ES6的模块不是对象，import命令会被JavaScript引擎静态分析，在编译时就引入模块代码，而不是在代码运行时加载。<br>
+CommonJs是运行时加载，即在输入时先加载整个模块，生成一个对象，然后再从这个对象上读取方法。</p> <h2 id="css选择器"><a href="#css选择器" class="header-anchor">#</a> css选择器</h2> <p>!important &gt; 行内样式 &gt; ID选择器 &gt; 类、伪类、属性 &gt; 元素、伪元素 &gt; 继承 &gt; 通配符</p></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">Last Updated:</span> <span class="time">7/5/2021, 12:50:06 AM</span></div></footer> <div class="page-nav"><p class="inner"><!----> <span class="next"><a href="/blog/prototype/">
+        定义
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/blog/assets/js/app.42f682ff.js" defer></script><script src="/blog/assets/js/2.c989e49d.js" defer></script><script src="/blog/assets/js/17.c7f079f0.js" defer></script>
+  </body>
+</html>
