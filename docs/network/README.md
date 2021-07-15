@@ -82,17 +82,17 @@ CSSOM树和DOM树构建完成后会开始生成渲染树，浏览器调用GPU绘
 408 Request Timeout：服务器接受请求超时。<br/>
 409 Conflict：资源冲突，例如上传文件时目标位置已经存在版本更新的资源。<br/>
 411 Length Required：如果请求含有包体且未携带Content-Length头部，且不属于chunk类请求时，返回411。<br/>
-![img.png](img.png)
-![img_1.png](img_1.png)
+![img.png](./img.png)
+![img_1.png](./img_1.png)
 
 #### 5XX
 500 Internal Server Error：服务器处理请求时发生内部错误。<br/>
 501 Not Implemented：服务器不支持当前请求的某个功能。<br/>
 502 Bad Gateway：代理服务器无法获取到合法响应。<br/>
 503 Service Unavailable：服务器超负载或停机维护、限流、限ip等<br/>
-![img_2.png](img_2.png)
+![img_2.png](./img_2.png)
 
-![img_3.png](img_3.png)
+![img_3.png](./img_3.png)
 
 Connection仅针对当前连接有效
 
@@ -208,7 +208,7 @@ HTTPS传输过程：
 预估过期时间：
 (DownloadTime - LastModified) * 10%
 
-###强制缓存
+### 强制缓存
 当浏览器向服务器发起请求时，服务器会将缓存规则放入HTTP响应报文的HTTP头中，和请求结果一起返回给浏览器。<br/>
 控制强制缓存的字段分别是Expires和Cache-Control，其中Cache-Control优先级更高。<br/>
 
@@ -225,12 +225,12 @@ Expires是HTTP/1.0控制网页缓存的字段，其值为服务器返回该请�
 - no-store: 所有内容都不会被缓存，既不使用强制缓存，也不使用协商缓存。
 - max-age=xxx: 缓存内容将在xxx秒后失效
 
-####缓存存放位置
+#### 缓存存放位置
 在浏览器中，浏览器会在js和图片等文件解析执行后直接存入内存缓存中，
 那么当刷新页面时只需直接从内存缓存中读取(from memory cache)；
 而css文件则会存入硬盘文件中，所以每次渲染页面都需要从硬盘读取缓存(from disk cache)。
 
-###协商缓存
+### 协商缓存
 协商缓存就是强制缓存失效后，浏览器携带缓存标识向服务器发起请求，由服务器根据缓存标识决定是否使用缓存的过程。主要有两种情况：<br/>
 1. 服务端返回304，协商缓存生效。<br/>
 1. 服务端返回200，协商缓存失败。<br/>
@@ -251,19 +251,22 @@ If-None-Match是客户端再次发起该请求时，携带上次请求返回的�
 服务器收到该请求后，发现该请求头中含有If-None-Match，则会根据If-None-Match的字段值与该资源在服务器的Etag值做对比。
 一致则返回304，代表资源无更新，继续使用缓存文件；不一致则重新返回资源文件，状态码为200。
 
-![img_4.png](img_4.png)
+![img_4.png](./img_4.png)
 
-![img_5.png](img_5.png)
+![img_5.png](./img_5.png)
 
-![img_6.png](img_6.png)
+![img_6.png](./img_6.png)
 min-fresh: 缓存时间至少有min-fresh这么长的时间才可用
-![img_7.png](img_7.png)
-![img_8.png](img_8.png)
+![img_7.png](./img_7.png)
+![img_8.png](./img_8.png)
 
-![img_9.png](img_9.png)
-![img_10.png](img_10.png)
+![img_9.png](./img_9.png)
+![img_10.png](./img_10.png)
 
-![img_11.png](img_11.png)
+![img_11.png](./img_11.png)
+
+
+
 ## 跨域
 #### 同源策略
 - 域名相同
@@ -284,6 +287,7 @@ min-fresh: 缓存时间至少有min-fresh这么长的时间才可用
 如果'Access-Control-Allow-Origin'中没有对应网址或 * ，那么浏览器就回把返回的内容忽略掉，并在控制台报错。
 
 CORS分为简单请求和复杂请求。
+
 #### 简单请求
 
 请求方法为其中之一： <br/>
