@@ -106,6 +106,31 @@ function deRepeat(arr) {
 }
 ```
 
+## 函数柯里化
+
+柯里化是一种将使用多个参数的一个函数转换成一系列使用一个参数的函数的技术
+
+```javascript
+function sub_curry(fn) {
+    const args = [...arguments].slice(1)
+    return function () {
+        return fn.apply(this, args.concat([...arguments]))
+    }
+}
+
+function curry(fn, length2) {
+    const length = length2 || fn.length
+    return function () {
+        if (arguments.length < length) {
+            const args = [fn].concat([...arguments])
+            return curry(sub_curry(fn, args), length-arguments.length)
+        } else {
+            return fn.apply(this, [...arguments])
+        }
+    }
+}
+```
+
 ##事件
 
 ```javascript
