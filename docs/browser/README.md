@@ -7,6 +7,11 @@
 - Samesite Cookie
 - token
 
+### cookie
+cookie用于服务器标识客户端的身份，通过set-Cookie来设置。  
+同时它也被用于广告追踪（第三方cookie）。  
+通过设置cookie上的sameSite属性可以对第三方cookie进行限制，有效的杜绝csrf攻击和广告追踪。
+
 ### webpack
 - 持久化缓存
 - 根据内容生成chunkhash，相对以往不会因为空格的改动使得缓存失效
@@ -32,3 +37,15 @@ Webpack 的运行流程是一个串行的过程,从启动到结束会依次执�
 
 ## small title
 content...
+
+
+
+cookie
+json.parse
+promise all return
+catch z执行顺序
+echarts 事件
+
+
+协作
+
