@@ -6,7 +6,15 @@ content...
 - 当组件在keep-alive内被切换，会执行activated和deactivated这两个生命周期钩子函数。
 - 使用include和exclude props进行有条件的缓存，使用max设置最多可以缓存多少组件实例，超过之后最久没有被访问的会被销毁。
 
-### title3-01
+### 自定义指令
+
+定义： vue中，代码复用和抽象的形式主要是组件，有的情况下需要直接操作dom元素，就会用到自定义指令
+
+- bind: 首次绑定时调用 
+- inserted: 插入父节点时调用 
+- update: 当前元素vnode更新时调用
+- componentUpdate: 组件所在vnode及其子vnode全部更新后调用
+- unbind：解绑时调用
 
 ## small title
 content...
