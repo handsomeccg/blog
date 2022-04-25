@@ -81,19 +81,50 @@ function myNew(fn, args) {
 ```
 
 ## 深拷贝
+
+
 ```javascript
-function deepClone(obj) {
-    // 判断是否为对象，否则直接return
-    if (typeof obj !== 'object' || obj === null) {
-        return obj
+function deepClone(target, map = new WeakMap()) {
+    if (typeof target === 'object') {
+        const cloneTarget = Array.isArray(target) ? [] : {}
+        if (map.has(target)) {
+            return map.get(target)
+        } else {
+            map.set(target, cloneTarget)
+        }
+        Object.keys(target).forEach(key => {
+            cloneTarget[key] = deepClone(target[key], map)
+        })
+        return cloneTarget
+    } else {
+        return target
     }
-    // 对象浅拷贝
-    const newObj = Array.isArray(obj) ? [...obj] : {...obj}
-    // 递归深拷贝
-    Reflect.ownKeys(obj).forEach((item) => {
-        newObj[item] = deepClone(obj[item])
-    })
-    return newObj
+}
+```
+
+```javascript
+function tree2List(tree, list, pId) {
+    list.push({id: tree.id, parentId: pId})
+    if (tree.children) {
+        for (let node of tree.children) {
+            tree2List(node, list, tree.id)
+        }
+    }
+    return list
+}
+
+function list2Tree(list) {
+    const map = new Map()
+    for (let node of list) {
+        map.set(node.id, node)
+    }
+    for (let node of list) {
+        const parentNode = map.get(node.parent)
+        if (parentNode) {
+            parentNode.children = parentNode.children ? [...parentNode.children, node] : [node]
+        }
+    }
+    return map.get(0)
 }
 ```
 
