@@ -6,6 +6,7 @@
 - 同源检测
 - Samesite Cookie
 - token
+- 重要请求用post方法
 
 ### cookie
 cookie用于服务器标识客户端的身份，通过set-Cookie来设置。  

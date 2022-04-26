@@ -23,7 +23,12 @@ Map和Object:
  - map可以进行迭代；
  - map在频繁增删键值对的场景下表现更好。
 
-### title3-01
+### 箭头函数
+
+- this指向，普通函数的this指向函数运行时的上下文。箭头函数本身没有this，引用的是它外层的this，所以在箭头函数里面调用的this是定义箭头函数时的上下文
+- 无法使用call、apply、bind来改变箭头函数this指向
+- 箭头函数没有prototype，不可以new
+- 箭头函数没有自己的arguments参数
 
 ## small title
 content...

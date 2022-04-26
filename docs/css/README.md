@@ -18,7 +18,16 @@ BFC里面的布局不对外面产生影响
 标准盒模型： width + padding + borderWidth  <br/>
 IE盒模型：  width (内容区根据计算获得具体大小)  <br/>
 
-### title3-01
+### css选择器权重
+
+!important > 内联样式 > id选择器 > 类选择器、属性选择器 > 通配符 > 继承样式
+
+
+## 回流与重绘
+获取offsetTop之类的行为会触发重绘，取值时可以将值缓存起来，避免重复获取造成性能问题。 <br/>
+避免逐条改变样式，使用类名来合并样式
+
+只有 transform opacity filter 可以触发GPU硬件加速
 
 ## small title
 content...
