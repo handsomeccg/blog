@@ -18,6 +18,14 @@ BFC里面的布局不对外面产生影响
 标准盒模型： width + padding + borderWidth  <br/>
 IE盒模型：  width (内容区根据计算获得具体大小)  <br/>
 
+### transform 和 普通的left区别
+
+使用left属性设置动画会一直触发浏览器重绘，
+而css3的transform会采用GPU硬件加速，不触发重绘，性能更好。
+
+transform创建了一个新的复合图层。
+video、canvas也会创建独立的复合图层
+
 ### css选择器权重
 
 !important > 内联样式 > id选择器 > 类选择器、属性选择器 > 通配符 > 继承样式
