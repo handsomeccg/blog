@@ -41,10 +41,11 @@ CSSOM树和DOM树构建完成后会开始生成渲染树，浏览器调用GPU绘
 
 ### get和post
 
-1.get请求在浏览器回退时是无害的，post则会再次请求。
-2.get请求可以缓存，post不能
-3.get请求数据包含在url中，post请求数据在request body，存储的数据可以更多
-4.get多用于不改变资源的请求，post反之
+1. get请求在浏览器回退时是无害的，post则会再次请求。
+2. get请求可以缓存，post不能
+3. get请求数据包含在url中，post请求数据在request body，存储的数据可以更多
+4. get多用于不改变资源的请求，post反之
+5. get请求用url方式编码（application/x-www-form-urlencoded），post请求可以用多种编码
 
 ### 常见状态码
 
@@ -119,10 +120,12 @@ Accept-Ranges: 告诉客户端服务器上该资源是否允许range请求。<br
 
 ### HTTP2
 
+http1.0中，在发完一个http请求后，会断开tcp连接，代价过大。通过设置Connection：keep-alive,使得http请求可以复用tcp连接。<br/>
+http1.1中把长链接写进标准，默认开启。<br/>
 Http1.1的问题：
  - 随着带宽的增加，延迟并没有显著下降
- - 并发连接有限（6个）
- - 同一连接同时只能完成一个HTTP事务（请求/响应）
+ - 并发连接有限（6个tcp连接），http请求在tcp连接上传输是不是并行的，单个tcp连接在同一时刻只能处理一个请求
+ - 同一tcp连接同时只能完成一个HTTP事务（请求/响应）
  - 无状态特性带来的巨大HTTP头部，重复传输体积巨大的HTTP头部
 
 1.多路复用

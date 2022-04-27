@@ -24,8 +24,10 @@ function isPlainObject (obj) {
 ### 模块化
 
 AMD与CMD<br/>
-AMD：提前引入包
+AMD：提前引入包<br/>
 CMD: 执行时才引入包<br/>
+
+AMD与CMD一般用于浏览器，异步加载。commonJs用于服务端，同步加载。
 
 CommonJS模块输出的是一个值的拷贝，ES6模块输出的是值的引用。<br/>
 ES6的模块不是对象，import命令会被JavaScript引擎静态分析，在编译时就引入模块代码，而不是在代码运行时加载。<br/>
@@ -41,6 +43,10 @@ CommonJS的一个模块，就是一个脚本文件。require 命令第一次加�
 - EsModule:  
     esModule不会关心是否发生了循环引用，只是生成一个指向被加载模块的引用。 若操作不当，则会发生循环引用，可通过webpack检查循环引用的plugin来预防无限循环引用的发生。
 
+模块化的好处：
+- 减少命名冲突
+- 更好地分离，按需加载，利于打包分析
+- 利于维护
 
 #### CommonJs的require
 

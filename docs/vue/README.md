@@ -46,5 +46,6 @@ content...
 这样每个mutation执行完成后都可以对应到一个新状态 ，devtool就可以打个snapchat追踪状态
 将不受控的代码放到action，mutation只做状态改变
 
-## small title
-content...
+## 动态路由
+- seo优化
+- 方便keep-alive更新
