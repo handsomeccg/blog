@@ -5,13 +5,26 @@
 防护策略：
 - 同源检测
 - Samesite Cookie
-- token
+- 使用token
+- 使用复杂请求，触发cors预检
 - 重要请求用post方法
 
 ### cookie
-cookie用于服务器标识客户端的身份，通过set-Cookie来设置。  
-同时它也被用于广告追踪（第三方cookie）。  
-通过设置cookie上的sameSite属性可以对第三方cookie进行限制，有效的杜绝csrf攻击和广告追踪。
+- cookie用于服务器标识客户端的身份，通过set-Cookie来设置。  
+- 同时它也被用于广告追踪（第三方cookie） 网站嵌入第三方广告平台的代码，用户每次访问页面会将记录连带cookie传到第三方广告平台。  
+- 通过设置cookie上的sameSite属性可以对第三方cookie进行限制，有效的杜绝csrf攻击和广告追踪。
+
+### session
+- session由服务端维护，key-value方式存储，key一般生成后通过setCookie存储在客户端cookie中。
+- 用户较多时，可能造成服务器压力
+- 多服务器下session的共享与同步问题
+
+### token
+- 服务端无状态化，可扩展性好
+- 服务端不用存储token数据，用解析token的计算时间换取存储session的存储空间，在一定程度上减少查询数据库，减小服务器压力。
+- token相较于cookie不用考虑同源；也可以避免csrf攻击
+- 移动端对cookie的支持不佳，使用token更好
+- token本身包含了认证信息，泄露后任何人可以获得该token的权限，为了减少盗用，token的有效期应设置得比较短，重要操作需对用户做二次认证。
 
 ### webpack
 - 持久化缓存

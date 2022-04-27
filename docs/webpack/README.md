@@ -7,6 +7,12 @@
 4. 更好的长期缓存支持，chunkid不按顺序生成；如果只修改了注释或变量名，不会导致contentHash变化。
 5. assetModules代替url-loader
 
+个人做了什么优化：
+- loader使用include缩小范围
+- cache-loader
+- 将commonJs改为esModule，从而更好地tree-shaking
+- 将url-loader替换为assetModules，减少包的引入，提高效率
+
 Webpack 的运行流程是一个串行的过程,从启动到结束会依次执行以下流程 :
 
 初始化参数：从配置文件和 Shell 语句中读取与合并参数,得出最终的参数。
