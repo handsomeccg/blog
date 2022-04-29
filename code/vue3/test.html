@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function mount(vnode, container) {
+        const { tag, props = {}, children } = vnode
+        const el = document.createElement(tag)
+        Object.keys(props).forEach(key => {
+            el.setAttribute(key, props[key])
+        })
+        if (typeof children === 'string')  {
+            el.textContent = children
+        } else {
+            children.forEach(child => {
+                mount(child, el)
+            })
+        }
+        container.appendChild(el)
+    }
+</script>
+</body>
+</html>

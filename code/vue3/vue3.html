@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app"></div>
+
+<script>
+    function h(tag, prop, children) {
+        return {
+            tag,
+            prop,
+            children
+        }
+    }
+    function mount(vnode, container) {
+        const el = vnode.el = document.createElement(vnode.tag)
+        for (const [key, value] of Object.entries(vnode.prop)) {
+            el.setAttribute(key, value)
+        }
+        if (typeof vnode.children === 'string') {
+            el.textContent = vnode.children
+        } else {
+            for (let child of vnode.children) {
+                mount(child, el)
+            }
+        }
+        container.appendChild(el)
+    }
+    const vdom = h('h1', {class: 'h1-c'}, 'hello')
+    mount(vdom, document.getElementById('app'))
+
+    function patch(n1, n2, container) {
+        if (n1.tag !== n2.tag) {
+            mount(n2, container)
+            return
+        }
+        for (const [key, value] of Object.entries(n1.prop)) {
+            if (!n2.prop.key) {
+                // 删除
+                n1.el.removeAttribute(key)
+            } else if (n2.prop.key !== value) {
+                // 更新
+                n1.el.setAttribute(key, n2.prop.key)
+            }
+        }
+        for (const [key, value] of Object.entries(n2.prop)) {
+            if (!n1.prop.key) {
+                // 新增
+                n1.el.setAttribute(key, value)
+            }
+        }
+    }
+
+    const vdom2 = h('h1', {class: 'h1-b'}, 'hello-world')
+    patch(vdom, vdom2)
+</script>
+</body>
+</html>

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app"></div>
+<script>
+    function h(tag, prop, children) {
+        return {
+            tag,
+            prop,
+            children
+        }
+    }
+    function mount(vnode, container) {
+        const el = vnode.el = document.createElement(vnode.tag)
+        for (const [key, value] of Object.entries(vnode.prop)) {
+            if (key.startsWith('on')) {
+                console.log(key, value)
+                el.addEventListener(key.slice(2).toLowerCase(), value)
+            } else {
+                el.setAttribute(key, value)
+            }
+        }
+        if (typeof vnode.children === 'string') {
+            el.textContent = vnode.children
+        } else {
+            for (let child of vnode.children) {
+                mount(child, el)
+            }
+        }
+        container.appendChild(el)
+    }
+
+    function patch(n1, n2) {
+        const el = n2.el = n1.el
+        // 比较节点类型
+        if (n1.tag !== n2.tag) {
+            // replace
+            // mount(n2, container)
+            // return
+        }
+        // 比较属性值
+        for (const [key, value] of Object.entries(n1.prop)) {
+            if (!n2.prop[key]) {
+                console.log('delete')
+                // 删除
+                el.removeAttribute(key)
+            } else if (n2.prop[key] !== value) {
+                console.log('update')
+                // 更新
+                el.setAttribute(key, n2.prop[key])
+            }
+        }
+        for (const [key, value] of Object.entries(n2.prop)) {
+            if (!n1.prop[key]) {
+                console.log('add')
+                // 新增
+                el.setAttribute(key, value)
+            }
+        }
+
+        // 比较children
+        if (typeof n2.children === 'string') {
+            if (n1.children !== n2.children) {
+                el.textContent = n2.children
+            }
+        } else {
+            if (typeof n1.children === 'string') {
+                el.innerHTML = ''
+                n2.children.forEach(child => {
+                    mount(child, el)
+                })
+            } else {
+                // 两者的children都为array
+                const oldChildren = n1.children
+                const newChildren = n2.children
+                const commonLength = Math.min(oldChildren.length, newChildren.length)
+                for (let i=0;i<commonLength;i++) {
+                    patch(oldChildren[i], newChildren[i])
+                }
+                if (newChildren.length > commonLength) {
+                    newChildren.slice(commonLength).forEach(child => {
+                        mount(child, el)
+                    })
+                }
+                if (oldChildren.length > commonLength) {
+                    oldChildren.slice(commonLength).forEach(child => {
+                        el.removeChild(child.el)
+                    })
+                }
+
+            }
+        }
+    }
+
+
+    // reactivity
+
+    let activityEffect = null
+    class Dep {
+        subscribers = new Set()
+        depend() {
+            if (activityEffect) {
+                this.subscribers.add(activityEffect)
+            }
+        }
+        notify() {
+            this.subscribers.forEach(effect => {
+                effect()
+            })
+        }
+    }
+    function watchEffect(effect) {
+        activityEffect = effect
+        effect()
+        activityEffect = null
+    }
+
+    const targetMap = new WeakMap()
+    function getDep(raw, key) {
+        let depsMap = targetMap.get(raw)
+        if (!depsMap) {
+            depsMap = new Map()
+            targetMap.set(raw, depsMap)
+        }
+        let dep = depsMap.get(key)
+        if (!dep) {
+            dep = new Dep()
+            depsMap.set(key, dep)
+        }
+        return dep
+    }
+    const reactiveHandlers = {
+        get(raw, key) {
+            const dep = getDep(raw, key)
+            dep.depend()
+            return raw[key]
+        },
+        set(raw, key, value) {
+            const dep = getDep(raw, key)
+            raw[key] = value
+            dep.notify()
+        }
+    }
+    function reactive(raw) {
+        return new Proxy(raw, reactiveHandlers)
+    }
+
+    const state = reactive({
+        count: 0
+    })
+    watchEffect(() => {
+        console.log(state.count)
+    })
+
+    function mountApp(component, container) {
+        let oldVdom
+        let isMounted = false
+        watchEffect(() => {
+            if (!isMounted) {
+                oldVdom = component.render()
+                mount(oldVdom, container)
+                isMounted = true
+            } else {
+                const newVdom = component.render()
+                patch(oldVdom, newVdom)
+                oldVdom = newVdom
+            }
+        })
+    }
+    const App = {
+        data: reactive({count: 0}),
+        render() {
+            return h('div', {class: 'mini-vue', onClick: () => this.data.count++}, String(this.data.count))
+        }
+    }
+    mountApp(App, document.getElementById('app'))
+</script>
+</body>
+</html>
