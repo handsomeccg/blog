@@ -160,6 +160,19 @@ function curry(fn, length2) {
         }
     }
 }
+
+// 精简
+function curry(fn) {
+    let length = fn.length
+    const judge = (...args) => {
+        if (args.length === length) {
+            return fn.apply(this, args)
+        } else {
+            return (...newArgs) => judge(...newArgs, ...args)
+        }
+    }
+    return judge
+}
 ```
 
 ##事件

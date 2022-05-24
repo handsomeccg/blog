@@ -9,8 +9,9 @@ content...
 ## vue3相对于vue2的优化
 - ts支持
 - 响应式，vue3使用proxy，可以更全面地监听对象与数组
-- vue3的静态提升，将不会更新的节点提升，避免重复创建，减少垃圾回收的频率
-- vue3会将可能会更新的属性标记出来，从而避免全量检查
+- vue3的静态提升，将不会更新的节点提升，避免重复创建，减少垃圾回收的频率。
+- vue3的编译会为运行时提供提示，将可能会更新的属性标记出来，从而避免全量检查。
+- 绑定事件的缓存：onClick: cache[1] || cache[1] = ctx.foo(123) 。避免diff的检查，另外防止父组件渲染时导致子组件的不必要渲染。（<Foo @click="foo(123)" />）
 - 优化源代码，支持更好地tree-shaking，减小一半的打包体积至10k
 
 ## slot插槽
@@ -22,12 +23,12 @@ content...
 ### Vue keep-alive
 - keep-alive包裹的组件失活时会被缓存下来，主要用于保留组件状态。  
 - 当组件在keep-alive内被切换，会执行activated和deactivated这两个生命周期钩子函数。
-- 使用include和exclude props进行有条件的缓存，使用max设置最多可以缓存多少组件实例，超过之后最久没有被访问的会被销毁。
+- 使用include和exclude props进行有条件的缓存，使用max设置最多可以缓存多少组件实例，超过之后最久没有被访问的会被销毁。exclude的优先级高于include
 
 ### nextTick
 
 被监听的数据发生变化后，会通知vue去做dom更新，dom更新这一步骤是异步执行的。
-如果同一个watcher被多次触发，只会被推入到操作队列中一次，以避免不必要的计算和dom改动
+如果同一个watcher被多次触发，只会被推入到操作队列中一次，以避免不必要的计算和dom改动。
 
 调用优先级 promise -> MutationObserve -> setImmediate -> setTimeout
 
